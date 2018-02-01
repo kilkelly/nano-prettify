@@ -1,7 +1,7 @@
 {
   "name": "nano-prettify",
   "version": "1.0.0",
-  "description": "Prettify / format Nano (formally RaiBlocks) raw amounts to be more human-readable. Format amounts in any Nano compatible unit e.g. unano, Gnano etc.... Adds decimal point and commas where necessary. Raw amounts are commonly returned when interacting with a Nano node.",
+  "description": "Format Nano (formally RaiBlocks) raw amounts to be more human-readable",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist",

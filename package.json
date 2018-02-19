@@ -1,6 +1,6 @@
 {
   "name": "nano-prettify",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Format Nano (formally RaiBlocks) raw amounts to be more human-readable",
   "main": "dist/index.js",
   "scripts": {

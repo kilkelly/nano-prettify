@@ -19,7 +19,7 @@ var nanoPrettify = require('nano-prettify').nanoPrettify
 const { nanoPrettify } = require('nano-prettify')
 
 // import
-import nanoPrettify from 'nanoPrettify'
+import nanoPrettify from 'nano-prettify'
 ```
 
 ## Usage Example

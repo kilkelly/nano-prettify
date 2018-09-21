@@ -42,8 +42,22 @@ function formatNanoValue (nanoValue,
     unit
   }) {
   let unitPlaces = units[unit].places
-  let fractionalPartOfNanoValue = nanoValue.substring(nanoValue.length - unitPlaces)  
+
+  let fractionalPartOfNanoValue = (nanoValue.length - unitPlaces) > 0
+    ? nanoValue.substring(nanoValue.length - unitPlaces)
+    : nanoValue
+
   let integerPartOfNanoValue = nanoValue.substring(0, nanoValue.length - fractionalPartOfNanoValue.length)
+
+  // Left pad fractional part after decimal point with zeroes if required
+  while (fractionalPartOfNanoValue.length < unitPlaces) {
+    fractionalPartOfNanoValue = '0' + fractionalPartOfNanoValue
+  }
+
+  if (!integerPartOfNanoValue) {
+    integerPartOfNanoValue = '0'
+  }
+
   let integerPartOfNanoValueWithCommas = []
 
   if (commas) {
@@ -88,13 +102,17 @@ function nanoPrettify_ (
   // Check that the raw value we are working with is a string
   if (typeof raw !== 'string') {
     console.error('nano-prettify must be supplied with a string. Please check your types.')
-    return 'NANO_PRETTIFY_DISPLAY_ERROR'
+    return 'NANO_PRETTIFY_ERROR_NOT_A_STRING'
   }
 
-  let importantRawDigits = raw
-  let rawNanoValueInProcess = importantRawDigits
+  // Check that the raw value contains only digits
+  let rawRegexTestResult = raw.match(/[0-9]/g)
+  if (!rawRegexTestResult || rawRegexTestResult.length !== raw.length) {
+    console.error('nano-prettify must be supplied with a valid raw value (containing only digits). Please check the raw value supplied.')
+    return 'NANO_PRETTIFY_ERROR_NOT_VALID_RAW_VALUE'
+  }
 
-  return formatNanoValue(rawNanoValueInProcess, {
+  return formatNanoValue(raw, {
     commas,
     decimals,
     decimalPlaces,

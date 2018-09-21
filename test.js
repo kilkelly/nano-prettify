@@ -3,7 +3,12 @@ var nanoPrettify = require('./dist/index').nanoPrettify
 
 test('Handle incorrect type', function (t) {
   t.plan(1)
-  t.equal(nanoPrettify(235580100176034320859259343606608761791), 'NANO_PRETTIFY_DISPLAY_ERROR')
+  t.equal(nanoPrettify(235580100176034320859259343606608761791), 'NANO_PRETTIFY_ERROR_NOT_A_STRING')
+})
+
+test('Handle non-valid raw value', function (t) {
+  t.plan(1)
+  t.equal(nanoPrettify('abc10017603432defg59343606608761791'), 'NANO_PRETTIFY_ERROR_NOT_VALID_RAW_VALUE')
 })
 
 test('Prettify amount (default unit: Mnano)', function (t) {
@@ -74,5 +79,10 @@ test('Prettify amount (unit: knano)', function (t) {
 test('Prettify amount (unit: Gnano)', function (t) {
   t.plan(1)
   t.equal(nanoPrettify('235580100176034320859259343606608761791', { unit: 'Gnano' }), '235,580.100176')
+})
+
+test('Prettify amount (leading zeros after decimal point)', function (t) {
+  t.plan(1)
+  t.equal(nanoPrettify('9083915172772997892689', { unit: 'knano', decimals: true, decimalPlaces: 16, commas: false }), '0.0000090839151727')
 })
 

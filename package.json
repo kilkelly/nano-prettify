@@ -32,6 +32,6 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.3.0",
     "rimraf": "^3.0.0",
-    "tape": "^4.8.0"
+    "tape": "^5.0.1"
   }
 }
